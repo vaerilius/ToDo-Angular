@@ -1,0 +1,10 @@
+<a class="list-group-item  d-flex justify-content-between align-items-center"
+   [class.bg-success]="todo.isDone"
+   [class.bg-light]="!todo.isDone">
+  <h6 class="display-4 ">
+    {{todo.name}}</h6>
+  <button class="rounded shadow-sm" style='font-size:18px'
+          (click)="removeTodo(index)">
+    <fa-icon [icon]="faTrash"></fa-icon>
+  </button>
+</a>

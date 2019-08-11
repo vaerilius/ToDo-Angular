@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Add toDo</span>
+      </div>
+      <input type="text" class="form-control" #inputTodo>
+      <button class="btn btn-outline-secondary" type="button"
+              (click)="addTodo(inputTodo)">Add
+      </button>
+    </div>
+    <app-todo-list></app-todo-list>
+  </div>
+</div>
