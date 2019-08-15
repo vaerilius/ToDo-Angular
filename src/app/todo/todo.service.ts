@@ -1,5 +1,6 @@
 import {Todo} from './todo.model';
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,16 @@ import {EventEmitter, Injectable} from '@angular/core';
 
 export class TodoService {
 
-  todosChanged = new EventEmitter<Todo[]>();
+  todosChanged = new Subject<Todo[]>();
+
+  private todosDone: Todo[] = [];
+
   private todos: Todo[] = [
     new Todo('test 1'),
     new Todo('test 2'),
     new Todo('test 3'),
   ];
+  private editTodo: Todo;
 
   constructor() {
   }
@@ -23,18 +28,18 @@ export class TodoService {
 
   addTodo(todo: Todo) {
     this.todos.push(todo);
-    this.todosChanged.emit(this.todos.slice());
+    this.todosChanged.next(this.todos.slice());
   }
 
   getTodo(id: number) {
-  return this.todos[id];
+    return this.todos[id];
   }
-  changeStatus(id: number) {
 
-  console.log(this.getTodo(id).isDone);
-  this.setStatus(this.getTodo(id));
+  changeStatus(id: number) {
+    this.setStatus(this.getTodo(id));
   }
-  setStatus(todoStatus: Todo) {
+
+  private setStatus(todoStatus: Todo) {
     if (!todoStatus.isDone) {
       todoStatus.isDone = true;
     } else {
@@ -43,8 +48,12 @@ export class TodoService {
   }
 
   remove(id: number) {
-    this.todos.splice(id,1);
-    this.todosChanged.emit(this.todos.slice());
-    console.log(id);
+    this.todos.splice(id, 1);
+    this.todosChanged.next(this.todos.slice());
+  }
+
+  edit(index: number) {
+
+    this.editTodo = this.getTodo(index);
   }
 }

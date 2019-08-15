@@ -3,8 +3,17 @@
    [class.bg-light]="!todo.isDone">
   <h6 class="display-4 ">
     {{todo.name}}</h6>
-  <button class="rounded shadow-sm" style='font-size:18px'
-          (click)="removeTodo(index)">
+  <p class="">{{todo.isDone ? 'Job Done' : 'Do it now!'}}</p>
+  <span>
+      <button class="rounded shadow-sm" style='font-size:18px'
+              (click)="removeTodo(index)">
     <fa-icon [icon]="faTrash"></fa-icon>
   </button>
+  <button class="rounded shadow-sm ml-1" style='font-size:18px'
+          (click)="editTodo(index)">
+    <fa-icon [icon]="faEdit"></fa-icon>
+  </button>
+  </span>
+
+
 </a>

@@ -1,14 +1,27 @@
 <div class="container">
-  <div class="col-md-12">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Add toDo</span>
-      </div>
-      <input type="text" class="form-control" #inputTodo>
-      <button class="btn btn-outline-secondary" type="button"
-              (click)="addTodo(inputTodo)">Add
-      </button>
+  <div class="row">
+    <div class="col-ms-12 mx-auto">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="row r">
+          <div class="col">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Todo"
+                   required
+            formControlName="name">
+          </div>
+          <div class="col">
+            <button type="submit" class="form-control btn btn-success"
+            [disabled]="f.invalid "
+            >{{editTodo ? 'Update' : 'Add'}}</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <app-todo-list></app-todo-list>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-5">
+      <app-todo-list></app-todo-list>
+    </div>
   </div>
 </div>
